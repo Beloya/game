@@ -1,10 +1,10 @@
 package game;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomManager {
 
-	private static Random random=new Random();
 	private final static double baseValue=10000;
 	/**
 	 * 
@@ -17,17 +17,17 @@ public class RandomManager {
 			return false;
 		if(rate>=baseValue)
 			return true;
-		int randomValue = random.nextInt(rateInt);
+		int randomValue = random().nextInt(rateInt);
 		if(randomValue<rate)
 			return true;
 		return false;
 	}
-	public static Random getRandom() {
-		return random;
-	}
-	public static void setRandom(Random random) {
-		RandomManager.random = random;
+	public static ThreadLocalRandom getRandom() {
+		return random();
 	}
 	
+	public static ThreadLocalRandom random() {
+		return ThreadLocalRandom.current();
+	}
 	
 }
